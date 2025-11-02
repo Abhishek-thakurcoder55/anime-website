@@ -1,0 +1,23 @@
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+section {
+    scroll-margin-top: 70px;
+}
+
+#anime-gallery .card {
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#anime-gallery .card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    height: 300px;
+    object-fit: cover;
+}

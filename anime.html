@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime World - Abhi Thakur</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0b0b0d;
+      color: white;
+      scroll-behavior: smooth;
+    }
+
+    .navbar {
+      background-color: #111;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #ff4b5c !important;
+    }
+
+    .hero-section {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+      url('https://wallpaperaccess.com/full/1437767.jpg') center/cover no-repeat;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-section h1 {
+      font-size: 4rem;
+      font-weight: 700;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    #search-bar {
+      width: 100%;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    #anime-gallery .card {
+      background-color: #1c1c1f;
+      border: none;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+    }
+
+    #anime-gallery .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 75, 92, 0.4);
+    }
+
+    .card-img-top {
+      height: 350px;
+      object-fit: cover;
+      border-bottom: 3px solid #ff4b5c;
+    }
+
+    footer {
+      background-color: #111;
+      padding: 20px 0;
+      color: #aaa;
+      margin-top: 50px;
+    }
+
+    .btn-search {
+      background-color: #ff4b5c;
+      color: white;
+      border: none;
+    }
+
+    .btn-search:hover {
+      background-color: #ff2c45;
+    }
+
+    .section-heading {
+      color: #ff4b5c;
+      font-weight: 600;
+    }
+
+    #anime-info {
+      display: none;
+      background-color: #1a1a1d;
+      padding: 20px;
+      border-radius: 15px;
+      color: #eee;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    #anime-info img {
+      border-radius: 10px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .anime-detail p span {
+      color: #ff4b5c;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Anime World</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <h1>Anime World</h1>
+    <p>Created by Abhi Thakur — Dive into the world of anime greatness!</p>
+    <a href="#gallery" class="btn btn-danger mt-3">Explore Now</a>
+  </section>
+
+  <!-- Search Section -->
+  <section id="search" class="text-center py-5 bg-dark">
+    <div class="container">
+      <h2 class="section-heading mb-4">Search Your Favorite Anime</h2>
+      <div id="search-bar" class="input-group">
+        <input type="text" id="anime-search" class="form-control" placeholder="Enter anime name (e.g., Naruto)">
+        <button class="btn btn-search" id="search-btn">Search</button>
+      </div>
+      <div id="anime-info" class="mt-4">
+        <div class="row align-items-center">
+          <div class="col-md-4 text-center">
+            <img id="anime-image" alt="">
+          </div>
+          <div class="col-md-8 anime-detail">
+            <h3 id="anime-title" class="mt-3"></h3>
+            <p><span>Episodes:</span> <span id="anime-episodes"></span></p>
+            <p><span>Score:</span> <span id="anime-score"></span></p>
+            <p><span>Status:</span> <span id="anime-status"></span></p>
+            <p id="anime-synopsis"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="py-5">
+    <div class="container">
+      <h2 class="text-center section-heading mb-5">Famous Anime Gallery</h2>
+      <div class="row" id="anime-gallery"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="bg-light text-dark py-5 text-center">
+    <div class="container">
+      <h2 class="section-heading mb-3">About the Creator</h2>
+      <p class="lead">I'm <strong>Abhi Thakur</strong>, a web developer and anime enthusiast who enjoys creating interactive and visually stunning websites. Anime World brings together anime art, data, and passion into one engaging platform — inspired by top anime platforms like AniwatchTV and MyAnimeList.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-5 text-center bg-dark">
+    <div class="container">
+      <h2 class="section-heading mb-3">Contact</h2>
+      <p>Email: <a href="mailto:royalthakur5515@gmail.com" class="text-danger">royalthakur5515@gmail.com</a></p>
+      <p>Mobile: <a href="tel:+919876543210" class="text-danger">+91 7905623296</a></p>
+      <p>Location: Ghaziabad, India</p>
+    </div>
+  </section>
+
+  <footer class="text-center">
+    &copy; 2025 Anime World | Designed by Abhi Thakur
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Famous Anime List
+    const animeNames = [
+      'Naruto', 'One Piece', 'Attack on Titan', 'Demon Slayer', 'Jujutsu Kaisen', 'Death Note', 
+      'Dragon Ball Z', 'Tokyo Ghoul', 'My Hero Academia', 'Bleach', 'Chainsaw Man', 
+      'One Punch Man', 'Fullmetal Alchemist: Brotherhood', 'Black Clover', 'Vinland Saga', 
+      'Sword Art Online', 'Hunter x Hunter', 'Spy x Family', 'Blue Lock', 'Solo Leveling'
+    ];
+
+    const gallery = document.getElementById('anime-gallery');
+
+    // Fetch Gallery Data
+    async function fetchGalleryImages() {
+      for (let anime of animeNames) {
+        try {
+          const response = await fetch(`https://api.jikan.moe/v4/anime?q=${anime}&limit=1`);
+          const data = await response.json();
+          const animeData = data.data[0];
+          const imgUrl = animeData.images.jpg.image_url;
+          const title = animeData.title;
+          const score = animeData.score || "N/A";
+
+          const col = document.createElement('div');
+          col.className = 'col-md-4 col-lg-3';
+
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <img src="${imgUrl}" class="card-img-top" alt="${title}">
+            <div class="card-body text-center">
+              <h5 class="card-title">${title}</h5>
+              <p class="card-text text-secondary">⭐ ${score}</p>
+            </div>
+          `;
+
+          col.appendChild(card);
+          gallery.appendChild(col);
+        } catch (error) {
+          console.error('Error fetching image:', anime, error);
+        }
+      }
+    }
+
+    fetchGalleryImages();
+
+    // Search Anime Info
+    document.getElementById('search-btn').addEventListener('click', async () => {
+      const query = document.getElementById('anime-search').value.trim();
+      if (!query) return alert('Please enter an anime name');
+
+      const infoBox = document.getElementById('anime-info');
+      try {
+        const res = await fetch(`https://api.jikan.moe/v4/anime?q=${query}&limit=1`);
+        const data = await res.json();
+        const anime = data.data[0];
+
+        if (!anime) {
+          infoBox.style.display = 'block';
+          infoBox.innerHTML = `<p>No anime found. Try another name!</p>`;
+          return;
+        }
+
+        document.getElementById('anime-image').src = anime.images.jpg.image_url;
+        document.getElementById('anime-title').textContent = anime.title;
+        document.getElementById('anime-synopsis').textContent = anime.synopsis || "No synopsis available.";
+        document.getElementById('anime-score').textContent = anime.score || "N/A";
+        document.getElementById('anime-status').textContent = anime.status || "Unknown";
+        document.getElementById('anime-episodes').textContent = anime.episodes || "N/A";
+        infoBox.style.display = 'block';
+      } catch (error) {
+        console.error('Error fetching anime info:', error);
+      }
+    });
+  </script>
+</body>
+</html>
